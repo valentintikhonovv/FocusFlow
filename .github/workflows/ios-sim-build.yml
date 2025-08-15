@@ -24,6 +24,14 @@ jobs:
       - name: Generate Xcode project
         run: xcodegen generate
 
+      - name: Ensure Xcode 15.4-compatible project format
+        run: |
+          if [ -f FocusFlow.xcodeproj/project.pbxproj ]; then
+            echo "Before:" && grep -E "objectVersion = " FocusFlow.xcodeproj/project.pbxproj || true
+            /usr/bin/sed -i '' -E 's/objectVersion = [0-9]+;/objectVersion = 76;/' FocusFlow.xcodeproj/project.pbxproj
+            echo "After:" && grep -E "objectVersion = " FocusFlow.xcodeproj/project.pbxproj || true
+          fi
+
       - name: Build for iOS Simulator (no signing)
         run: |
           xcodebuild \
