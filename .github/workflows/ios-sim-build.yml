@@ -1,0 +1,33 @@
+name: iOS Simulator Build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate Xcode project
+        run: xcodegen generate
+      - name: Build for iOS Simulator
+        run: |
+          xcodebuild \
+            -scheme FocusFlow \
+            -sdk iphonesimulator \
+            -configuration Release \
+            -destination 'platform=iOS Simulator,name=iPhone 15' \
+            clean build | xcpretty
+      - name: Archive .app artifact
+        run: |
+          APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "FocusFlow.app" -type d | head -n 1)
+          echo "App path: $APP_PATH"
+          mkdir -p build-artifacts
+          cp -R "$APP_PATH" build-artifacts/FocusFlow.app
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FocusFlow-sim-app
+          path: build-artifacts/FocusFlow.app

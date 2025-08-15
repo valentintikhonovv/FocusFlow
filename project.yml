@@ -1,0 +1,42 @@
+name: FocusFlow
+options:
+  minimumXcodeGenVersion: 2.38.0
+packages: {}
+settings:
+  base:
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+    SWIFT_VERSION: "5.9"
+targets:
+  FocusFlow:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: Sources
+      - path: Resources
+    resources:
+      - path: Resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.focusflow
+        PRODUCT_NAME: FocusFlow
+        INFOPLIST_FILE: Sources/App/Info.plist
+        DEVELOPMENT_TEAM: ""
+    scheme:
+      testTargets: []
+    info:
+      path: Sources/App/Info.plist
+      properties:
+        UILaunchScreen: { }
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UIUserInterfaceStyle: Automatic
+        CFBundleDisplayName: FocusFlow
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        LSApplicationCategoryType: "public.app-category.productivity"
+        CFBundleLocalizations: [en, es, de, fr, ru]
+        UIAppSupportsMultipleScenes: true
+        NSCalendarsUsageDescription: "Used to improve scheduling and reminders."
+        NSHealthShareUsageDescription: "Used to enrich fitness tracking."
+        NSHealthUpdateUsageDescription: "Used to write workouts you record."
+        NSRemindersUsageDescription: "Used to schedule local reminders."

@@ -1,0 +1,19 @@
+/* keys only; values live in specific languages */
+"app_name" = "FocusFlow";
+"tab_today" = "tab_today";
+"tab_timer" = "tab_timer";
+"tab_analytics" = "tab_analytics";
+"tab_more" = "tab_more";
+"start" = "start";
+"pause" = "pause";
+"reset" = "reset";
+"work" = "work";
+"break" = "break";
+"daily_goal" = "daily_goal";
+"subscribe" = "subscribe";
+"restore_purchases" = "restore_purchases";
+"try_free_3_days" = "try_free_3_days";
+"monthly_price" = "monthly_price";
+"annual_price" = "annual_price";
+"paywall_title" = "paywall_title";
+"paywall_bullets" = "paywall_bullets";
