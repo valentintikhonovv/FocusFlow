@@ -28,7 +28,7 @@ jobs:
         run: |
           if [ -f FocusFlow.xcodeproj/project.pbxproj ]; then
             echo "Before:" && grep -E "objectVersion = " FocusFlow.xcodeproj/project.pbxproj || true
-            /usr/bin/sed -i '' -E 's/objectVersion = [0-9]+;/objectVersion = 76;/' FocusFlow.xcodeproj/project.pbxproj
+            /usr/bin/sed -i '' -E 's/objectVersion = [0-9]+;/objectVersion = 56;/' FocusFlow.xcodeproj/project.pbxproj
             echo "After:" && grep -E "objectVersion = " FocusFlow.xcodeproj/project.pbxproj || true
           fi
 
