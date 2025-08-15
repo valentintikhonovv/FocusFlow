@@ -17,3 +17,6 @@
 ## Следующие шаги
 - Добавить аналитику (чарты), список сессий и сохранение в JSON.
 - Включить продукты в App Store Connect: `focusflow.pro.monthly`, `focusflow.pro.annual` с 3-дн. Trial.
+
+## CI build
+push → Actions → artifact FocusFlow-sim-app

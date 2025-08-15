@@ -10,21 +10,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # 1) Выбираем версию Xcode, которая есть на раннерах
       - name: Select Xcode 15.4
         uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '15.4'
 
-      # 2) Ставим XcodeGen для генерации .xcodeproj из project.yml
-      - name: Install XcodeGen
-        run: HOMEBREW_NO_AUTO_UPDATE=1 brew install xcodegen
+      - name: Brew update
+        run: brew update
 
-      # 3) Генерируем .xcodeproj
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
       - name: Generate Xcode project
         run: xcodegen generate
 
-      # 4) Собираем под симулятор. Без подписи!
       - name: Build for iOS Simulator (no signing)
         run: |
           xcodebuild \
@@ -32,14 +31,11 @@ jobs:
             -scheme FocusFlow \
             -sdk iphonesimulator \
             -configuration Release \
-            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 15' \
+            -destination 'platform=iOS Simulator,name=iPhone 15' \
             -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_IDENTITY="" \
             clean build
 
-      # 5) Публикуем .app как артефакт
       - name: Upload .app artifact
         uses: actions/upload-artifact@v4
         with:
