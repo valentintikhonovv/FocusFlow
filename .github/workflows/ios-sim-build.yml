@@ -9,25 +9,39 @@ jobs:
     runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
+
+      # 1) Выбираем версию Xcode, которая есть на раннерах
+      - name: Select Xcode 15.4
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.4'
+
+      # 2) Ставим XcodeGen для генерации .xcodeproj из project.yml
       - name: Install XcodeGen
-        run: brew install xcodegen
+        run: HOMEBREW_NO_AUTO_UPDATE=1 brew install xcodegen
+
+      # 3) Генерируем .xcodeproj
       - name: Generate Xcode project
         run: xcodegen generate
-      - name: Build for iOS Simulator
+
+      # 4) Собираем под симулятор. Без подписи!
+      - name: Build for iOS Simulator (no signing)
         run: |
           xcodebuild \
+            -project FocusFlow.xcodeproj \
             -scheme FocusFlow \
             -sdk iphonesimulator \
             -configuration Release \
-            -destination 'platform=iOS Simulator,name=iPhone 15' \
-            clean build | xcpretty
-      - name: Archive .app artifact
-        run: |
-          APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "FocusFlow.app" -type d | head -n 1)
-          echo "App path: $APP_PATH"
-          mkdir -p build-artifacts
-          cp -R "$APP_PATH" build-artifacts/FocusFlow.app
-      - uses: actions/upload-artifact@v4
+            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 15' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_IDENTITY="" \
+            clean build
+
+      # 5) Публикуем .app как артефакт
+      - name: Upload .app artifact
+        uses: actions/upload-artifact@v4
         with:
           name: FocusFlow-sim-app
-          path: build-artifacts/FocusFlow.app
+          path: build/Build/Products/Release-iphonesimulator/FocusFlow.app
