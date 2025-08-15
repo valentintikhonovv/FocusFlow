@@ -28,15 +28,3 @@ targets:
       path: Sources/App/Info.plist
       properties:
         UILaunchScreen: { }
-        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
-        UIUserInterfaceStyle: Automatic
-        CFBundleDisplayName: FocusFlow
-        CFBundleShortVersionString: "1.0"
-        CFBundleVersion: "1"
-        LSApplicationCategoryType: "public.app-category.productivity"
-        CFBundleLocalizations: [en, es, de, fr, ru]
-        UIAppSupportsMultipleScenes: true
-        NSCalendarsUsageDescription: "Used to improve scheduling and reminders."
-        NSHealthShareUsageDescription: "Used to enrich fitness tracking."
-        NSHealthUpdateUsageDescription: "Used to write workouts you record."
-        NSRemindersUsageDescription: "Used to schedule local reminders."
