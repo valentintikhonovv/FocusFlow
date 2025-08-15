@@ -32,9 +32,14 @@ jobs:
             echo "After:" && grep -E "objectVersion = " FocusFlow.xcodeproj/project.pbxproj || true
           fi
 
+      - name: Preflight — list schemes and settings
+        run: |
+          xcodebuild -list -project FocusFlow.xcodeproj | cat
+          xcodebuild -project FocusFlow.xcodeproj -scheme FocusFlow -showBuildSettings | cat
+
       - name: Build for iOS Simulator (no signing)
         run: |
-          xcodebuild \
+          NSUnbufferedIO=YES xcodebuild \
             -project FocusFlow.xcodeproj \
             -scheme FocusFlow \
             -sdk iphonesimulator \
